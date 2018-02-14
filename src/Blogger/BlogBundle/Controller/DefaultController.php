@@ -6,8 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
+    /**
+     * Homepage
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
-        return $this->render('BloggerBlogBundle:Default:index.html.twig');
+        return $this->render('@BloggerBlog/Default/index.html.twig');
     }
 }

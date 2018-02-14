@@ -40,7 +40,7 @@ DirectoryIndex app.php
     # endless redirect loop (request -> rewrite to front controller ->
     # redirect -> request -> ...).
     # So in case you get a "too many redirects" error or you always get redirected
-    # to the start page because your Apache does not expose the REDIRECT_STATUS
+    # to the start Page because your Apache does not expose the REDIRECT_STATUS
     # environment variable, you have 2 choices:
     # - disable this feature by commenting the following 2 lines or
     # - use Apache >= 2.3.9 and replace all L flags by END flags and remove the
@@ -60,7 +60,7 @@ DirectoryIndex app.php
 <IfModule !mod_rewrite.c>
     <IfModule mod_alias.c>
         # When mod_rewrite is not available, we instruct a temporary redirect of
-        # the start page to the front controller explicitly so that the website
+        # the start Page to the front controller explicitly so that the website
         # and the generated links can still be used.
         RedirectMatch 302 ^/$ /app.php/
         # RedirectTemp cannot be used instead
