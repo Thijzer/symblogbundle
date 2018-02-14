@@ -1,5 +1,5 @@
 <?php
-// src/Blogger/BlogBundle/Entity/Enquiry.php
+
 namespace Blogger\BlogBundle\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
