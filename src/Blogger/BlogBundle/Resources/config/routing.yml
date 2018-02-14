@@ -11,6 +11,12 @@ blogger_blog_about:
     path: /page/about
     defaults: { _controller: BloggerBlogBundle:Page:about }
 
-BloggerBlogBundle_contact:
+blogger_blog_contact:
     path:  /page/contact
     defaults: { _controller: BloggerBlogBundle:Page:contact }
+
+blogger_blog_contact:
+    path:  /page/contact
+    defaults: { _controller: BloggerBlogBundle:Page:contact }
+    requirements:
+        _method:  GET|POST

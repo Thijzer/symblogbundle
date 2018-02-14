@@ -1,7 +1,6 @@
 {# src/Blogger/BlogBundle/Resources/views/Page/contact.html.twig #}
-{% extends 'BloggerBlogBundle::layout.html.twig' %}
+{% extends '@BloggerBlog/layout.html.twig' %}
 {% block title %}Contact{% endblock%}
-
 
 {% block body %}
     <header>
@@ -9,9 +8,17 @@
     </header>
 
 
-    &lt;p&gt;Want to contact symblog?&lt;/p&gt;
+    {% for flashMessage in app.session.flashbag.get('blogger-notice') %}
+        <div class="blogger-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
 
-    &lt;form action="{{ path('BloggerBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger"&gt;
+
+    <p>Want to contact symblog?</p>
+
+    {{ form_start(form) }}
+
     {{ form_errors(form) }}
 
     {{ form_row(form.name) }}
@@ -19,9 +26,7 @@
     {{ form_row(form.subject) }}
     {{ form_row(form.body) }}
 
-    {{ form_rest(form) }}
+    <input type="submit" value="Submit" />
 
-    &lt;input type="submit" value="Submit" /&gt;
-    &lt;/form&gt;
-
+    {{ form_end(form) }}
 {% endblock %}
