@@ -1,3 +1,12 @@
+# src/Blogger/BlogBundle/Resources/config/routing.yml
 blogger_blog_homepage:
-    path:     /
+    path: /
     defaults: { _controller: BloggerBlogBundle:Default:index }
+
+blogger_blog_page:
+    path: /page
+    defaults: { _controller: BloggerBlogBundle:Page:index }
+
+blogger_blog_about:
+    path: /page/about
+    defaults: { _controller: BloggerBlogBundle:Page:about }
