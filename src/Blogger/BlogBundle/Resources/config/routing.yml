@@ -1,4 +1,3 @@
-# src/Blogger/BlogBundle/Resources/config/routing.yml
 blogger_blog_homepage:
     path: /
     defaults: { _controller: BloggerBlogBundle:Default:index }
@@ -22,6 +21,6 @@ blogger_blog_contact:
         _method:  GET|POST
 blogger_blog_show:
     path:  /page/{id}
-    defaults: { _controller: BloggerBlogBundle:Blog:show }
+    defaults: { _controller: BloggerBlogBundle:article:show }
     requirements:
         id: \d+

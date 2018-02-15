@@ -1,6 +1,6 @@
-Blogger\BlogBundle\Entity\Blog:
+Blogger\BlogBundle\Entity\Article:
     type: entity
-    table: blog
+    table: article
     id:
         id:
             type: integer
@@ -27,7 +27,7 @@ Blogger\BlogBundle\Entity\Blog:
             unique: false
             nullable: false
             precision: 0
-        blog:
+        body:
             type: text
             scale: 0
             length: null
@@ -62,4 +62,6 @@ Blogger\BlogBundle\Entity\Blog:
             unique: false
             nullable: false
             precision: 0
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        preUpdate:
+            - setUpdatedValue

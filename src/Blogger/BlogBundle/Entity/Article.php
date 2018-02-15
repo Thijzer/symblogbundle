@@ -12,25 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="blog")
+ * @ORM\Table(name="article")
  * @ORM\HasLifecycleCallbacks
  */
-class Blog
+class Article
 {
-    public function __construct()
-    {
-        $this->setCreated(new \DateTime());
-        $this->setUpdated(new \DateTime());
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedValue()
-    {
-        $this->setUpdated(new \DateTime());
-    }
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -51,7 +37,7 @@ class Blog
     /**
      * @ORM\Column(type="text")
      */
-    protected $blog;
+    protected $body;
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -75,6 +61,14 @@ class Blog
      */
     protected $updated;
 
+    public function __construct()
+    {
+        $dateTime = new \DateTime();
+
+        $this->setCreated($dateTime);
+        $this->setUpdated(clone $dateTime);
+    }
+
     /**
      * Get id
      *
@@ -90,7 +84,7 @@ class Blog
      *
      * @param string $title
      *
-     * @return Blog
+     * @return Article
      */
     public function setTitle($title)
     {
@@ -114,7 +108,7 @@ class Blog
      *
      * @param string $author
      *
-     * @return Blog
+     * @return Article
      */
     public function setAuthor($author)
     {
@@ -136,13 +130,13 @@ class Blog
     /**
      * Set blog
      *
-     * @param string $blog
+     * @param string $body
      *
-     * @return Blog
+     * @return Article
      */
-    public function setBlog($blog)
+    public function setBody($body)
     {
-        $this->blog = $blog;
+        $this->body = $body;
 
         return $this;
     }
@@ -152,9 +146,9 @@ class Blog
      *
      * @return string
      */
-    public function getBlog()
+    public function getBody()
     {
-        return $this->blog;
+        return $this->body;
     }
 
     /**
@@ -162,7 +156,7 @@ class Blog
      *
      * @param string $image
      *
-     * @return Blog
+     * @return Article
      */
     public function setImage($image)
     {
@@ -186,7 +180,7 @@ class Blog
      *
      * @param string $tags
      *
-     * @return Blog
+     * @return Article
      */
     public function setTags($tags)
     {
@@ -210,7 +204,7 @@ class Blog
      *
      * @param \DateTime $created
      *
-     * @return Blog
+     * @return Article
      */
     public function setCreated($created)
     {
@@ -234,7 +228,7 @@ class Blog
      *
      * @param \DateTime $updated
      *
-     * @return Blog
+     * @return Article
      */
     public function setUpdated($updated)
     {
@@ -251,5 +245,13 @@ class Blog
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedValue()
+    {
+        $this->setUpdated(new \DateTime());
     }
 }

@@ -9,5 +9,5 @@ services:
         tags: [form.choice_list_factor]
 
     blogger_blog.fixtures.blog:
-        class: Blogger\BlogBundle\DataFixtures\ORM\BlogFixtures
+        class: Blogger\BlogBundle\DataFixtures\ORM\ArticleFixtures
         tags: [doctrine.fixture.orm]
