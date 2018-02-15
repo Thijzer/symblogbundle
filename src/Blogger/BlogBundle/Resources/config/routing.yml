@@ -20,3 +20,8 @@ blogger_blog_contact:
     defaults: { _controller: BloggerBlogBundle:Page:contact }
     requirements:
         _method:  GET|POST
+blogger_blog_show:
+    path:  /page/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:show }
+    requirements:
+        id: \d+

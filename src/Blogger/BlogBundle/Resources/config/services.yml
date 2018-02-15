@@ -7,3 +7,7 @@ services:
     form.type.enquire_type:
         class: Blogger\BlogBundle\Form\EnquiryType
         tags: [form.choice_list_factor]
+
+    blogger_blog.fixtures.blog:
+        class: Blogger\BlogBundle\DataFixtures\ORM\BlogFixtures
+        tags: [doctrine.fixture.orm]
