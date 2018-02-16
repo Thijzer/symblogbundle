@@ -1,0 +1,10 @@
+{% block body %}
+    <h1>Add comment for blog post "{{ comment.article.title }}"</h1>
+    {% include '@BloggerBlog/Comment/form.html.twig' with { 'form': form } %}
+
+    {# trick to redirect from a embedded controller with form #}
+    {% if form.vars.submitted and form.vars.valid %}
+        <script>location.href = document.referrer;</script>
+    {% endif %}
+
+{% endblock %}

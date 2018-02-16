@@ -8,10 +8,11 @@
 
 namespace Blogger\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\Repository\ArticleRepository")
  * @ORM\Table(name="article")
  * @ORM\HasLifecycleCallbacks
  */
@@ -49,6 +50,9 @@ class Article
      */
     protected $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
+     */
     protected $comments;
 
     /**
@@ -63,6 +67,8 @@ class Article
 
     public function __construct()
     {
+        $this->comments = new ArrayCollection();
+
         $dateTime = new \DateTime();
 
         $this->setCreated($dateTime);
@@ -144,11 +150,16 @@ class Article
     /**
      * Get blog
      *
+     * @param null $length
      * @return string
      */
-    public function getBody()
+    public function getBody($length = null)
     {
-        return $this->body;
+        if (false === is_null($length) && $length > 0){
+            return substr($this->body, 0, $length);
+        } else {
+            return $this->body;
+        }
     }
 
     /**
@@ -253,5 +264,44 @@ class Article
     public function setUpdatedValue()
     {
         $this->setUpdated(new \DateTime());
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Blogger\BlogBundle\Entity\Comment $comment
+     *
+     * @return Article
+     */
+    public function addComment(\Blogger\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Blogger\BlogBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Blogger\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

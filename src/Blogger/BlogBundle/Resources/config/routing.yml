@@ -4,7 +4,7 @@ blogger_blog_homepage:
 
 blogger_blog_page:
     path: /page
-    defaults: { _controller: BloggerBlogBundle:Page:index }
+    defaults: { _controller: BloggerBlogBundle:Article:index }
 
 blogger_blog_about:
     path: /page/about
@@ -14,13 +14,14 @@ blogger_blog_contact:
     path:  /page/contact
     defaults: { _controller: BloggerBlogBundle:Page:contact }
 
-blogger_blog_contact:
-    path:  /page/contact
-    defaults: { _controller: BloggerBlogBundle:Page:contact }
-    requirements:
-        _method:  GET|POST
 blogger_blog_show:
     path:  /page/{id}
     defaults: { _controller: BloggerBlogBundle:article:show }
     requirements:
         id: \d+
+
+blogger_blog_comment_create:
+    path:  /comment/{articleId}
+    defaults: { _controller: BloggerBlogBundle:Comment:create }
+    requirements:
+        blog_id: \d+
