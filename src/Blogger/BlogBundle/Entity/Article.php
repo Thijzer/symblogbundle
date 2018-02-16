@@ -155,11 +155,13 @@ class Article
      */
     public function getBody($length = null)
     {
-        if (false === is_null($length) && $length > 0)
+        if (false === is_null($length) && $length > 0){
             return substr($this->body, 0, $length);
-        else
+        } else {
             return $this->body;
+        }
     }
+
     /**
      * Set image
      *

@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        $articles = $this->getDoctrine()->getRepository(Article::class)->getLatestArticles();
+        $articles = $this->getArticleRepository()->getLatestArticles();
 
         return $this->render('@BloggerBlog/Page/index.html.twig', array(
             'articles' => $articles
@@ -33,7 +33,7 @@ class ArticleController extends Controller
      */
     public function showAction($id)
     {
-        $article = $this->getDoctrine()->getRepository('BloggerBlogBundle:Article')->find($id);
+        $article = $this->getArticleRepository()->find($id);
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find article post.');
