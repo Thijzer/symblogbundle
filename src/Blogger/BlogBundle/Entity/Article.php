@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\Repository\ArticleRepository")
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\ArticleRepository")
  * @ORM\Table(name="article")
  * @ORM\HasLifecycleCallbacks
  */

@@ -36,7 +36,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @return \Blogger\BlogBundle\Entity\Repository\CommentRepository|\Doctrine\Common\Persistence\ObjectRepository
+     * @return \Blogger\BlogBundle\Repository\CommentRepository|\Doctrine\Common\Persistence\ObjectRepository
      */
     private function getCommentRepository()
     {

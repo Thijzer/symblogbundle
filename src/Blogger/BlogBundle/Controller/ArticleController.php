@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        $articles = $this->getArticleRepository()->getLatestArticles();
+        $articles = $this->getArticleRepository()->getAllArticles();
 
         return $this->render('@BloggerBlog/Page/index.html.twig', array(
             'articles' => $articles
