@@ -12,13 +12,15 @@ class ArticleFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
        for ($i = 0; $i <= 10; $i++) {
-           $manager->persist($this->createBlog($i));
+           $article = $this->createArticle($i);
+           $manager->persist($article);
+           $this->addReference('article-'.$i, $article);
        }
 
        $manager->flush();
     }
 
-    public function createBlog($i)
+    public function createArticle($i)
     {
         $faker = Factory::create();
 
