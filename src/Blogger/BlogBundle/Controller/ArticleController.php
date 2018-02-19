@@ -26,14 +26,14 @@ class ArticleController extends Controller
 
     /**
      * Show a article entry
-     * @param $id
+     * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \LogicException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
-        $article = $this->getArticleRepository()->find($id);
+        $article = $this->getArticleRepository()->findBySlug($slug);
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find article post.');
