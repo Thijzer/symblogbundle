@@ -11,6 +11,7 @@ parameters:
     locale: en
     # Blogger contact email address
     blogger_blog.emails.contact_email: jonas.degauquier@php.be
+    blogger_blog.comments.latest_comment_limit: 10
 
 framework:
     #esi: ~

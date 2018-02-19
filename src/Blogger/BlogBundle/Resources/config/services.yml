@@ -15,3 +15,7 @@ services:
     blogger_blog.fixtures.comment:
         class: Blogger\BlogBundle\DataFixtures\ORM\CommentFixtures
         tags: [doctrine.fixture.orm]
+
+    blogger_blog.twig.extension:
+            class: Blogger\BlogBundle\Twig\Extensions\BloggerBlogExtension
+            tags: [twig.extension]

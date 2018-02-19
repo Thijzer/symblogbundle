@@ -2,6 +2,8 @@
 
 namespace Blogger\BlogBundle\Controller;
 
+use Blogger\BlogBundle\Entity\Article;
+use Blogger\BlogBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Enquiry;
 use Blogger\BlogBundle\Form\EnquiryType;
@@ -39,6 +41,27 @@ class PageController extends Controller
 
         return $this->render('@BloggerBlog/Page/contact.html.twig', array(
             'form' => $form->createView()
+        ));
+    }
+
+    public function sidebarAction()
+    {
+        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
+        $tags = $articleRepository->getTags();
+        $tagWeights = $articleRepository->getTagWeights($tags);
+
+        $commentLimit = $this->container
+            ->getParameter('blogger_blog.comments.latest_comment_limit');
+
+        $latestComments = $this
+            ->getDoctrine()
+            ->getRepository(Comment::class)
+            ->getLatestComments($commentLimit)
+        ;
+
+        return $this->render('@BloggerBlog/Page/sidebar.html.twig', array(
+            'latestComments'    => $latestComments,
+            'tags'              => $tagWeights
         ));
     }
 }
