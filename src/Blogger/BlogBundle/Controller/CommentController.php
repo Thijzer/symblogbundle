@@ -21,19 +21,12 @@ class CommentController extends Controller
     public function createAction($articleId, Request $request)
     {
         $comment = new Comment($this->getArticle($articleId));
-        $article = new Article($this->getArticle($articleId));
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getCommentRepository()->addComment($comment);
-
-            return $this->redirect('blogger_blog_show', [
-                'id'    => $article->getId(),
-                'slug'  => $article->getSlug(),
-                'comment' => $comment->getId(),
-            ]);
         }
 
         return $this->render('@BloggerBlog/Comment/create.html.twig', [

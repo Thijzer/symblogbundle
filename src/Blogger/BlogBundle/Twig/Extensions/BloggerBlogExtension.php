@@ -25,17 +25,17 @@ class BloggerBlogExtension extends \Twig_Extension
                 $time = $delta;
                 $duration = $time . " second" . (($time > 1) ? "s" : "") . " ago";
                 break;
-            case $delta <=3600:
+            case $delta <= 3600:
                 // Mins
                 $time = floor($delta / 60);
                 $duration = $time . " minute" . (($time > 1) ? "s" : "") . " ago";
                 break;
-            case $delta <=86400:
+            case $delta <= 86400:
                 // Hours
                 $time = floor($delta / 3600);
                 $duration = $time . " hour" . (($time > 1) ? "s" : "") . " ago";
                 break;
-            case $delta >86400;
+            case $delta > 86400;
                 // Days
                 $time = floor($delta / 86400);
                 $duration = $time . " day" . (($time > 1) ? "s" : "") . " ago";
