@@ -21,21 +21,21 @@ class BloggerBlogExtension extends \Twig_Extension
 
         switch ($delta) {
             case $delta < 60:
-                // Seconds
+                // Secondes
                 $time = $delta;
-                $duration = $time . " second" . (($time > 1) ? "s" : "") . " ago";
+                $duration = $time . " second" . (($time === 0 || $time > 1) ? "s" : "") . " ago";
                 break;
-            case $delta <= 3600:
-                // Mins
+            case $delta < 3600:
+                // minutes
                 $time = floor($delta / 60);
                 $duration = $time . " minute" . (($time > 1) ? "s" : "") . " ago";
                 break;
-            case $delta <= 86400:
-                // Hours
+            case $delta < 86400:
+                // hours
                 $time = floor($delta / 3600);
                 $duration = $time . " hour" . (($time > 1) ? "s" : "") . " ago";
                 break;
-            case $delta > 86400;
+            case $delta >= 86400;
                 // Days
                 $time = floor($delta / 86400);
                 $duration = $time . " day" . (($time > 1) ? "s" : "") . " ago";

@@ -22,10 +22,4 @@ class EnquiryType extends AbstractType
         $builder->add('subject');
         $builder->add('body', TextareaType::class);
     }
-
-    public function getName()
-    {
-        return 'blogger_blogbundle_enquirytype';
-    }
-
 }

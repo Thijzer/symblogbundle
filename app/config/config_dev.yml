@@ -38,5 +38,4 @@ monolog:
         #    level: info
 
 swiftmailer:
-    delivery_addresses: [jonas.degauquier@phpro.be]
     disable_delivery: true
