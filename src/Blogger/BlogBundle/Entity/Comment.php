@@ -224,4 +224,18 @@ class Comment
             'message' => 'You must enter a comment'
         )));
     }
+
+    /**
+     * Set article
+     *
+     * @param \Blogger\BlogBundle\Entity\Article $article
+     *
+     * @return Comment
+     */
+    public function setArticle(\Blogger\BlogBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
 }

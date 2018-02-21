@@ -70,6 +70,12 @@ class Article
      */
     protected $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="article")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -362,5 +368,39 @@ class Article
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Blogger\BlogBundle\Entity\Category $category
+     *
+     * @return Article
+     */
+    public function addCategory(\Blogger\BlogBundle\Entity\Category $category)
+    {
+        $this->category[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Blogger\BlogBundle\Entity\Category $category
+     */
+    public function removeCategory(\Blogger\BlogBundle\Entity\Category $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

@@ -24,11 +24,15 @@ class PageController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if(isset($_POST['g-recaptcha-response'])){
+            $captcha=$_POST['g-recaptcha-response'];
+        }
+
+        if ($form->isSubmitted() && $form->isValid() && $captcha) {
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contact enquiry from symblog')
                 ->setFrom('enquiries@symblog.co.uk')
-                ->setTo($this->getParameter('blogger_blog.emails.contact_email'))
+                ->setTo('jonas.degauquier@phpro.be')
                 ->setBody($this->renderView('@BloggerBlog/Page/contactEmail.txt.twig', array('enquiry' => $enquiry)));
             $this->get('mailer')->send($message);
 
@@ -50,8 +54,10 @@ class PageController extends Controller
         $tags = $articleRepository->getTags();
         $tagWeights = $articleRepository->getTagWeights($tags);
 
-        $commentLimit = $this->container
-            ->getParameter('blogger_blog.comments.latest_comment_limit');
+       // $commentLimit = $this->container
+        //    ->getParameter('blogger_blog.comments.latest_comment_limit');
+
+            $commentLimit = 10;
 
         $latestComments = $this
             ->getDoctrine()

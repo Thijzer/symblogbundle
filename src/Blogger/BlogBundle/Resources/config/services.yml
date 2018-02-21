@@ -19,3 +19,8 @@ services:
     blogger_blog.twig.extension:
             class: Blogger\BlogBundle\Twig\Extensions\BloggerBlogExtension
             tags: [twig.extension]
+
+    pagerfanta.view.default:
+            class: Pagerfanta\View\DefaultView
+            public: false
+            tags: [{ name: pagerfanta.view, alias: default }]

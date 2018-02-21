@@ -19,7 +19,7 @@ class ArticleRepository extends EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        return $qb->execute();
+        return $qb;
     }
 
     public function findBySlug($slug)

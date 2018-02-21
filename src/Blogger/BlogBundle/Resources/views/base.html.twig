@@ -11,6 +11,7 @@
         <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('bundles/whiteoctoberpagerfanta/css/pagerfantaDefault.css') }}" type="text/css" media="all" />
     {% endblock %}
 </head>
 <body>
@@ -49,6 +50,9 @@
     </div>
 </section>
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="BlogBundle/Resources/public/js/reCaptcha.js"></script>
+{% endblock %}
 </body>
 </html>
