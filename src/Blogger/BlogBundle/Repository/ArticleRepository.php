@@ -2,6 +2,7 @@
 
 namespace Blogger\BlogBundle\Repository;
 
+use Blogger\BlogBundle\Controller\ArticleController;
 use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository
@@ -48,18 +49,7 @@ class ArticleRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        $tags = array();
-        foreach ($blogTags as $blogTag)
-        {
-            $tags = array_merge(explode(",", $blogTag['tags']), $tags);
-        }
-
-        foreach ($tags as &$tag)
-        {
-            $tag = trim($tag);
-        }
-
-        return $tags;
+        return $blogTags;
     }
 
     public function getTagWeights($tags)
@@ -96,17 +86,6 @@ class ArticleRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        $categories = array();
-        foreach ($article_categories as $article_category)
-        {
-            $categories = array_merge(explode(",", $article_category['category']), $categories);
-        }
-
-        foreach ($categories as &$category)
-        {
-            $category = trim($category);
-        }
-
-        return $categories;
+        return $article_categories;
     }
 }

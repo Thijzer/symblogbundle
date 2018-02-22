@@ -88,4 +88,10 @@ class ArticleController extends Controller
 
         return $pagerfanta;
     }
+
+    public function createCategoryList()
+    {
+        $this->getArticleRepository();
+        $this->createCategoryList2($this->getArticles());
+    }
 }

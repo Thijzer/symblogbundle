@@ -24,15 +24,17 @@ class PageController extends Controller
 
         $form->handleRequest($request);
 
+        $captcha = $this->get('phpro.captcha-service');
+
         if(isset($_POST['g-recaptcha-response'])){
             $captcha=$_POST['g-recaptcha-response'];
         }
 
-        if ($form->isSubmitted() && $form->isValid() && $captcha) {
+        if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contact enquiry from symblog')
                 ->setFrom('enquiries@symblog.co.uk')
-                ->setTo('jonas.degauquier@phpro.be')
+                ->setTo($this->getParameter('blogger_blog.emails.contact_email'))
                 ->setBody($this->renderView('@BloggerBlog/Page/contactEmail.txt.twig', array('enquiry' => $enquiry)));
             $this->get('mailer')->send($message);
 
@@ -51,15 +53,12 @@ class PageController extends Controller
     public function sidebarAction()
     {
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
-        $tags = $articleRepository->getTags();
+        $tags = $this->createTagList($articleRepository->getTags());
         $tagWeights = $articleRepository->getTagWeights($tags);
 
-        $categories = $articleRepository->getCategories();
+        $categories = $this->createCategoryList($articleRepository->getCategories());
 
-       // $commentLimit = $this->container
-        //    ->getParameter('blogger_blog.comments.latest_comment_limit');
-
-            $commentLimit = 10;
+        $commentLimit = 10;
 
         $latestComments = $this
             ->getDoctrine()
@@ -72,5 +71,37 @@ class PageController extends Controller
             'tags'              => $tagWeights,
             'categories'        => $categories
         ));
+    }
+
+    public function createCategoryList($article_categories)
+    {
+        $categories = array();
+        foreach ($article_categories as $article_category)
+        {
+            $categories = array_merge(explode(",", $article_category['category']), $categories);
+        }
+
+        foreach ($categories as &$category)
+        {
+            $category = trim($category);
+        }
+
+        return $categories;
+    }
+
+    public function createTagList($blogTags)
+    {
+        $tags = array();
+        foreach ($blogTags as $blogTag)
+        {
+            $tags = array_merge(explode(",", $blogTag['tags']), $tags);
+        }
+
+        foreach ($tags as &$tag)
+        {
+            $tag = trim($tag);
+        }
+
+        return $tags;
     }
 }
