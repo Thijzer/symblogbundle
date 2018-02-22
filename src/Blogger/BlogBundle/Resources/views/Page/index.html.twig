@@ -1,7 +1,7 @@
 {% extends '@BloggerBlog/layout.html.twig' %}
 
 {% block body %}
-    {% for article in articles %}
+    {% for article in my_pager.currentPageResults %}
         {% set path = path('blogger_blog_show', { 'slug': article.slug })  %}
         <article class="blog">
             <div class="date"><time datetime="{{ article.created|date('c') }}">{{ article.created|date('l, F j, Y') }}</time></div>
@@ -24,4 +24,7 @@
     {% else %}
         <p>There are no article entries for symblog</p>
     {% endfor %}
+    <div class="pagerfanta">
+        {{ pagerfanta(my_pager) }}
+    </div>
 {% endblock %}

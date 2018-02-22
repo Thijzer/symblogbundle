@@ -5,6 +5,8 @@ namespace Blogger\BlogBundle\Controller;
 use Blogger\BlogBundle\Entity\Article;
 use Blogger\BlogBundle\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * Article controller.
@@ -15,13 +17,26 @@ class ArticleController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \LogicException
      */
-    public function indexAction()
+    public function indexAction($page = 1)
     {
         $articles = $this->getArticleRepository()->getAllArticles();
 
-        return $this->render('@BloggerBlog/Page/index.html.twig', array(
-            'articles' => $articles
-        ));
+        $pagerfanta = $this->pagination($page, $articles);
+
+        return $this->render('@BloggerBlog/Page/index.html.twig', [
+            'my_pager' => $pagerfanta,
+        ]);
+    }
+
+    public function showByCategoryAction($category , $page = 1)
+    {
+        $articles = $this->getArticleRepository()->getAllArticlesByCategory($category);
+
+        $pagerfanta = $this->pagination($page, $articles);
+
+        return $this->render('@BloggerBlog/Page/index.html.twig', [
+                'my_pager'      => $pagerfanta,
+        ]);
     }
 
     /**
@@ -55,5 +70,22 @@ class ArticleController extends Controller
     private function getArticleRepository()
     {
         return $this->getDoctrine()->getRepository(Article::class);
+    }
+
+    private function pagination($page, $articles)
+    {
+        $adapter = new DoctrineORMAdapter($articles);
+        $pagerfanta = new Pagerfanta($adapter);
+
+        $maxPerPage = $pagerfanta->getMaxPerPage();
+        $pagerfanta->setMaxPerPage($maxPerPage); // 10 by default
+
+        $nbResults = $pagerfanta->getNbResults();
+        $pagerfanta->getNbPages();
+
+        $pagerfanta->setCurrentPage($page);
+        $pagerfanta->haveToPaginate($nbResults); // whether the number of results is higher than the max per page
+
+        return $pagerfanta;
     }
 }

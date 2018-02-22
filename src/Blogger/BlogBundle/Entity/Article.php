@@ -70,6 +70,11 @@ class Article
      */
     protected $slug;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $category;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -362,5 +367,29 @@ class Article
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return Article
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

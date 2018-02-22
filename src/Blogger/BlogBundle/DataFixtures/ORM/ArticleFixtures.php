@@ -32,6 +32,7 @@ class ArticleFixtures extends Fixture
         $article->setTags('symfony, php, paradise, symblog');
         $article->setCreated($faker->dateTime());
         $article->setUpdated($article->getCreated());
+        $article->setCategory($faker->word);
 
         return $article;
     }

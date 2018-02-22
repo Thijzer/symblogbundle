@@ -26,7 +26,10 @@
     {{ form_row(form.subject) }}
     {{ form_row(form.body) }}
 
+    <div class="g-recaptcha" data-sitekey= {{ recaptcha_sitekey }}></div>
+
     <input type="submit" value="Submit" />
 
     {{ form_end(form) }}
+
 {% endblock %}

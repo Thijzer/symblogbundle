@@ -19,12 +19,26 @@ class ArticleRepository extends EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        return $qb->execute();
+        return $qb;
     }
 
     public function findBySlug($slug)
     {
         return $this->findOneBy(['slug' => $slug]);
+    }
+
+    public function getAllArticlesByCategory($category)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a, c')
+            ->leftJoin('a.comments', 'c')
+            ->where('a.category IN (:category)')
+            ->setParameter('category', $category)
+            ->addOrderBy('a.created', 'DESC')
+            ->getQuery()
+        ;
+
+        return $qb;
     }
 
     public function getTags()
@@ -34,18 +48,7 @@ class ArticleRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        $tags = array();
-        foreach ($blogTags as $blogTag)
-        {
-            $tags = array_merge(explode(",", $blogTag['tags']), $tags);
-        }
-
-        foreach ($tags as &$tag)
-        {
-            $tag = trim($tag);
-        }
-
-        return $tags;
+        return $blogTags;
     }
 
     public function getTagWeights($tags)
@@ -73,5 +76,15 @@ class ArticleRepository extends EntityRepository
         }
 
         return $tagWeights;
+    }
+
+    public function getCategories()
+    {
+        $article_categories = $this->createQueryBuilder('a')
+            ->select('a.category')
+            ->getQuery()
+            ->getResult();
+
+        return $article_categories;
     }
 }

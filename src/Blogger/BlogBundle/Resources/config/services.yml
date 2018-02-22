@@ -17,5 +17,13 @@ services:
         tags: [doctrine.fixture.orm]
 
     blogger_blog.twig.extension:
-            class: Blogger\BlogBundle\Twig\Extensions\BloggerBlogExtension
-            tags: [twig.extension]
+        class: Blogger\BlogBundle\Twig\Extensions\BloggerBlogExtension
+        tags: [twig.extension]
+
+    pagerfanta.view.default:
+        class: Pagerfanta\View\DefaultView
+        public: false
+        tags: [{ name: pagerfanta.view, alias: default }]
+
+    phpro.captcha-service:
+        class: Blogger\BlogBundle\Utils\Recaptcha
