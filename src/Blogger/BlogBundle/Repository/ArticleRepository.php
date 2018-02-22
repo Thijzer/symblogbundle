@@ -2,7 +2,6 @@
 
 namespace Blogger\BlogBundle\Repository;
 
-use Blogger\BlogBundle\Controller\ArticleController;
 use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository

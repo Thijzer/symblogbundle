@@ -26,10 +26,6 @@ class PageController extends Controller
 
         $captcha = $this->get('phpro.captcha-service');
 
-        if(isset($_POST['g-recaptcha-response'])){
-            $captcha=$_POST['g-recaptcha-response'];
-        }
-
         if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contact enquiry from symblog')
@@ -53,8 +49,8 @@ class PageController extends Controller
     public function sidebarAction()
     {
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
-        $tags = $this->createTagList($articleRepository->getTags());
-        $tagWeights = $articleRepository->getTagWeights($tags);
+        $tagslist = $this->createTagList($articleRepository->getTags());
+        $tagWeights = $articleRepository->getTagWeights($tagslist);
 
         $categories = $this->createCategoryList($articleRepository->getCategories());
 

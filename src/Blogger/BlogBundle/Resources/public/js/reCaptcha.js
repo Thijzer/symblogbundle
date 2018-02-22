@@ -1,5 +1,5 @@
 var onloadCallback = function() {
     grecaptcha.render('html_element', {
-        'sitekey' : '{{ sitekey }}'
+        'sitekey' : '{{ recaptcha_sitekey }}'
     });
 };
