@@ -71,8 +71,7 @@ class Article
     protected $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="article")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\Column(type="string")
      */
     protected $category;
 
@@ -371,30 +370,6 @@ class Article
     }
 
     /**
-     * Add category
-     *
-     * @param \Blogger\BlogBundle\Entity\Category $category
-     *
-     * @return Article
-     */
-    public function addCategory(\Blogger\BlogBundle\Entity\Category $category)
-    {
-        $this->category[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Blogger\BlogBundle\Entity\Category $category
-     */
-    public function removeCategory(\Blogger\BlogBundle\Entity\Category $category)
-    {
-        $this->category->removeElement($category);
-    }
-
-    /**
      * Get category
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -402,5 +377,19 @@ class Article
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return Article
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

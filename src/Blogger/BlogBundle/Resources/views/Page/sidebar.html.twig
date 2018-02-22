@@ -1,5 +1,19 @@
 <section class="section">
     <header>
+        <h3>Categories</h3>
+    </header>
+    <p class="tags">
+        {% for category in categories %}
+        <a href="{{ path('blogger_blog_show_by_categorie', { 'category':  category}) }}">
+            {{ category }}
+        </a>
+        {% else %}
+    <p>There are no categories</p>
+    {% endfor %}
+    </p>
+</section>
+<section class="section">
+    <header>
         <h3>Tag Cloud</h3>
     </header>
     <p class="tags">

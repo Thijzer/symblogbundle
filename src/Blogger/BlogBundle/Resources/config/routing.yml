@@ -22,6 +22,12 @@ blogger_blog_show:
     path:  /page/article/{slug}
     defaults: { _controller: BloggerBlogBundle:Article:show }
 
+blogger_blog_show_by_categorie:
+    path:  /page/{category}/{page}
+    defaults:
+      page: 1
+      _controller: BloggerBlogBundle:Article:showByCategory
+
 blogger_blog_comment_create:
     path:  /comment/{articleId}
     defaults: { _controller: BloggerBlogBundle:Comment:create }

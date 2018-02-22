@@ -27,6 +27,20 @@ class ArticleRepository extends EntityRepository
         return $this->findOneBy(['slug' => $slug]);
     }
 
+    public function getAllArticlesByCategory($category)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a, c')
+            ->leftJoin('a.comments', 'c')
+            ->where('a.category IN (:category)')
+            ->setParameter('category', $category)
+            ->addOrderBy('a.created', 'DESC')
+            ->getQuery()
+        ;
+
+        return $qb;
+    }
+
     public function getTags()
     {
         $blogTags = $this->createQueryBuilder('b')
@@ -73,5 +87,26 @@ class ArticleRepository extends EntityRepository
         }
 
         return $tagWeights;
+    }
+
+    public function getCategories()
+    {
+        $article_categories = $this->createQueryBuilder('a')
+            ->select('a.category')
+            ->getQuery()
+            ->getResult();
+
+        $categories = array();
+        foreach ($article_categories as $article_category)
+        {
+            $categories = array_merge(explode(",", $article_category['category']), $categories);
+        }
+
+        foreach ($categories as &$category)
+        {
+            $category = trim($category);
+        }
+
+        return $categories;
     }
 }
