@@ -2,6 +2,7 @@
 
 namespace Blogger\BlogBundle\Utils;
 
+use Symfony\Component\HttpFoundation\Request;
 
 class Recaptcha
 {

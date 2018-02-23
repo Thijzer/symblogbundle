@@ -1,0 +1,23 @@
+blog.home: Home
+blog.about: Over
+blog.contact: Contact
+blog.title: Maken van een blog in Symfony
+blog.created.by: gemaakt door
+blog.continue.reading: verder lezen ...
+blog.comments: Opmerkingen:
+blog.tags: Tags:
+blog.posted.by: Gepost door
+blog.no.articles: Er zijn geen artiekels voor symblog
+blog.categories: Categories
+blog.no.categories: Er zijn geen categorieën
+blog.tag.cloud: Tag cloud
+blog.no.tags: Er zijn geen tags
+blog.latest.comments: Laatste opmerkingen
+blog.commented.on: heeft een opmerking geplaatst op
+blog.no.comments: Er zijn geen recente opmerkingen
+blog.contact.title: Wil je symblog contacteren?
+blog.image: Foto niet gevonden
+blog.add.comment: Opmerking toevoegen
+blog.add.comment.post: Voeg een opmerking toe voor artiekel
+blog.first.comment: Er zijn geen opmerkingen voor dit artiekel. Voeg als eerste een opmerking toe ...
+

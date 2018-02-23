@@ -4,6 +4,7 @@ namespace Blogger\BlogBundle\Controller;
 
 use Blogger\BlogBundle\Entity\Article;
 use Blogger\BlogBundle\Entity\Comment;
+use Blogger\BlogBundle\Event\EnquiryEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Enquiry;
 use Blogger\BlogBundle\Form\EnquiryType;
@@ -27,12 +28,11 @@ class PageController extends Controller
         $captcha = $this->get('phpro.captcha-service');
 
         if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Contact enquiry from symblog')
-                ->setFrom('enquiries@symblog.co.uk')
-                ->setTo($this->getParameter('blogger_blog.emails.contact_email'))
-                ->setBody($this->renderView('@BloggerBlog/Page/contactEmail.txt.twig', array('enquiry' => $enquiry)));
-            $this->get('mailer')->send($message);
+
+            $eventDispatcher = $this->get('event_dispatcher');
+            $event = new EnquiryEvent();
+            $event->setCode(200);
+            $eventDispatcher->dispatch('custom.event.home_page_event', $event);
 
             $this->addFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
 
