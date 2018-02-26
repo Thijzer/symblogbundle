@@ -9,7 +9,7 @@ class EnquiryEvent extends Event
 {
     private $code;
 
-    public function setCode($code)
+    public function __construct($code)
     {
         $this->code = $code;
     }

@@ -27,19 +27,23 @@ class PageController extends Controller
 
         $captcha = $this->get('phpro.captcha-service');
 
+        $logger = $this->get('logger');
+
         if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
 
             $eventDispatcher = $this->get('event_dispatcher');
-            $event = new EnquiryEvent();
-            $event->setCode(200);
-            $eventDispatcher->dispatch('custom.event.home_page_event', $event);
+            $event = new EnquiryEvent($enquiry);
+            $eventDispatcher->dispatch('custom.event.contact_page', $event);
+
+            $logger->info('email is send');
 
             $this->addFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
-
             // Redirect - This is important to prevent users re-posting
             // the form if they refresh the page
             return $this->redirectToRoute('blogger_blog_contact');
         }
+
+        $logger->critical('reCaptcha attack');
 
         return $this->render('@BloggerBlog/Page/contact.html.twig', array(
             'form' => $form->createView()
@@ -49,23 +53,21 @@ class PageController extends Controller
     public function sidebarAction()
     {
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
-        $tagslist = $this->createTagList($articleRepository->getTags());
-        $tagWeights = $articleRepository->getTagWeights($tagslist);
 
         $categories = $this->createCategoryList($articleRepository->getCategories());
-
-        $commentLimit = 10;
 
         $latestComments = $this
             ->getDoctrine()
             ->getRepository(Comment::class)
-            ->getLatestComments($commentLimit)
+            ->getLatestComments($commentLimit = 10)
         ;
 
         return $this->render('@BloggerBlog/Page/sidebar.html.twig', array(
             'latestComments'    => $latestComments,
-            'tags'              => $tagWeights,
-            'categories'        => $categories
+            'tags'              => $this->get('phpro.extractor.tag_extractor')->getTagWeights(
+                $articleRepository->getAllArticles()->getResult()
+            ),
+            'categories'        => $categories,
         ));
     }
 
@@ -83,21 +85,5 @@ class PageController extends Controller
         }
 
         return $categories;
-    }
-
-    public function createTagList($blogTags)
-    {
-        $tags = array();
-        foreach ($blogTags as $blogTag)
-        {
-            $tags = array_merge(explode(",", $blogTag['tags']), $tags);
-        }
-
-        foreach ($tags as &$tag)
-        {
-            $tag = trim($tag);
-        }
-
-        return $tags;
     }
 }

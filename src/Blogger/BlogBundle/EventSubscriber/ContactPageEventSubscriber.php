@@ -2,18 +2,33 @@
 
 namespace Blogger\BlogBundle\EventSubscriber;
 
+use Blogger\BlogBundle\Event\EnquiryEvent;
+use Blogger\BlogBundle\Mailer\EmailAddress;
+use Blogger\BlogBundle\Mailer\Mail;
+use Blogger\BlogBundle\Mailer\MailerService;
 
 class ContactPageEventSubscriber
 {
-    public function onCustomEvent($event)
-    {
-        echo 'Enquiry was created';
+    private $mailerService;
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Contact enquiry from symblog')
-            ->setFrom('enquiries@symblog.co.uk')
-            ->setTo($this->getParameter('blogger_blog.emails.contact_email'))
-            ->setBody($this->renderView('@BloggerBlog/Page/contactEmail.txt.twig', array('enquiry' => $enquiry)));
-        $this->get('mailer')->send($message);
+    public function __construct(MailerService $mailerService)
+    {
+        $this->mailerService = $mailerService;
+    }
+
+    public function onCustomEvent(EnquiryEvent $event)
+    {
+        $enquiry = $event->getCode();
+
+        $this->mailerService->sendMail(
+            new Mail(
+                'Contact enquiry from symblog',
+                EmailAddress::createEmailAddress('username@domain.tld'),
+                EmailAddress::createEmailAddress('jonas.degauquier@gmail.com'),
+                $this->mailerService->renderTemplate('@BloggerBlog/Page/contactEmail.txt.twig' , [
+                    'enquiry' => $enquiry,
+                ])
+            )
+        );
     }
 }

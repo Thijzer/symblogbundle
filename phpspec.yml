@@ -1,0 +1,8 @@
+#phpspec.yml
+
+suites:
+  Mailer:
+    namespace: Blogger\BlogBundle\Mailer
+    psr4_prefix: Blogger\BlogBundle\Mailer
+    spec_path: src/Blogger/BlogBundle/Mailer
+    src_path: src/Blogger/BlogBundle/Mailer
