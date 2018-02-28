@@ -7,19 +7,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Recaptcha
 {
-    private $recaptcha_secretkey;
+    private $secretKey;
     private $logger;
 
-    public function __construct($recaptcha_secretkey, LoggerInterface $logger)
+    public function __construct(string $secretKey, LoggerInterface $logger)
     {
-        $this->recaptcha_secretkey = $recaptcha_secretkey;
+        $this->secretKey = $secretKey;
         $this->logger = $logger;
     }
 
     public function isValid(Request $request)
     {
         $data = [
-            'secret'   => $this->recaptcha_secretkey,
+            'secret'   => $this->secretKey,
             'response' => $request->get('g-recaptcha-response')
         ];
 

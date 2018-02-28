@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\App\Mailer;
+namespace App\Mailer\spec;
 
 use App\Mailer\EmailAddress;
 use PhpSpec\ObjectBehavior;

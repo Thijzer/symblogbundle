@@ -7,7 +7,7 @@ class BlogExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            'created_ago' => new \Twig_Filter_Method($this, 'createdAgo'),
+            'created_ago' => new \Twig_SimpleFilter('createdAgo'),
         ];
     }
 
