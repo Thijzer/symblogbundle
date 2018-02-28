@@ -2,7 +2,7 @@
 
 namespace Tests\BloggerBlogBundle\Entity;
 
-use Blogger\BlogBundle\Entity\Article;
+use App\Entity\Article;
 
 class ArticleTest extends \PHPUnit_Framework_TestCase
 {

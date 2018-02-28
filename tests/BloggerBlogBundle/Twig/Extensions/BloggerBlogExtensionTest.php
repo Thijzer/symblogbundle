@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: phpro
- * Date: 19/02/2018
- * Time: 15:03
- */
+
 
 namespace Tests\BloggerBlogBundle\Twig\Extensions;
 
-
-use Blogger\BlogBundle\Twig\Extensions\BloggerBlogExtension;
+use App\Twig\Extensions\BloggerBlogExtension;
 
 class BloggerBlogExtensionTest extends \PHPUnit_Framework_TestCase
 {

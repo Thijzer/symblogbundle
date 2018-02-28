@@ -2,9 +2,9 @@
 
 namespace Tests\BloggerBlogBundle\Mailer;
 
-use Blogger\BlogBundle\Mailer\EmailAddress;
-use Blogger\BlogBundle\Mailer\Mail;
-use Blogger\BlogBundle\Mailer\MailerService;
+use App\Mailer\EmailAddress;
+use App\Mailer\Mail;
+use App\Mailer\MailerService;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 

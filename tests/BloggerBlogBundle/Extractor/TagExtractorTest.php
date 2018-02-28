@@ -2,8 +2,8 @@
 
 namespace Tests\BloggerBlogBundle\Extractor;
 
-use Blogger\BlogBundle\Entity\Article;
-use Blogger\BlogBundle\Extractor\TagExtractor;
+use App\Entity\Article;
+use App\Extractor\TagExtractor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -56,7 +56,7 @@ class TagExtractorTest extends WebTestCase
         $this->assertEquals(3, $tagsWeight['js']);
         $this->assertEquals(4, $tagsWeight['html']);
 
-        $tagsWeight = $this->extractor->getTagWeights(array());
+        $tagsWeight = $this->extractor->getTagWeights([]);
         $this->assertEmpty($tagsWeight);
     }
 
