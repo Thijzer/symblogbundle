@@ -1,10 +1,10 @@
 {# src/Blogger/BlogBundle/Resources/views/Page/contact.html.twig #}
 {% extends '@BloggerBlog/layout.html.twig' %}
-{% block title %}Contact{% endblock%}
+{% block title %}{% trans %}blog.contact{% endtrans %}{% endblock%}
 
 {% block body %}
     <header>
-        <h1>Contact symblog</h1>
+        <h1>{% trans %}blog.contact{% endtrans %} symblog</h1>
     </header>
 
 
@@ -15,7 +15,7 @@
     {% endfor %}
 
 
-    <p>Want to contact symblog?</p>
+    <p>{% trans %}blog.contact.title{% endtrans %}</p>
 
     {{ form_start(form) }}
 
