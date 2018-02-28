@@ -25,9 +25,9 @@ class ArticleControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/page/commodi-omnis-4');
+        $crawler = $client->request('GET', '/page/article/expedita-iusto-4');
 
-        $this->assertEquals(1, $crawler->filter('h2:contains("Commodi omnis. 4")')->count());
+        $this->assertEquals(1, $crawler->filter('h2:contains("Expedita iusto. 4")')->count());
 
         $form = $crawler->selectButton('Submit')->form();
 

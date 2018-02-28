@@ -2,7 +2,6 @@
 
 namespace Tests\BloggerBlogBundle\Entity;
 
-
 use Blogger\BlogBundle\Entity\Article;
 
 class ArticleTest extends \PHPUnit_Framework_TestCase
@@ -13,7 +12,7 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('hello-world', $article->slugify('Hello World'));
         $this->assertEquals('a-day-with-symfony', $article->slugify('A Day With Symfony'));
-        $this->assertEquals('hello-world', $article->slugify('Hello    world'));
+        $this->assertEquals('hello-world', $article->slugify('Hello world'));
         $this->assertEquals('symblog', $article->slugify('symblog '));
     }
 

@@ -27,3 +27,23 @@ services:
 
     phpro.captcha-service:
         class: Blogger\BlogBundle\Utils\Recaptcha
+        arguments: ["%recaptcha_secretkey%", '@logger']
+
+    custom.event.contact_page:
+        class: Blogger\BlogBundle\EventSubscriber\ContactPageEventSubscriber
+        tags:
+            - { name: kernel.event_listener, event: custom.event.contact_page, method: onCustomEvent }
+        arguments: ['@phpro.mailer.mailer_service']
+
+    phpro.mailer.mailer_service:
+        class: Blogger\BlogBundle\Mailer\MailerService
+        arguments:
+            - '@twig'
+            - '@swiftmailer.mailer'
+        calls:
+            - method: setLogger
+              arguments:
+                  - '@logger'
+
+    phpro.extractor.tag_extractor:
+        class: Blogger\BlogBundle\Extractor\TagExtractor

@@ -4,6 +4,7 @@ namespace Blogger\BlogBundle\Controller;
 
 use Blogger\BlogBundle\Entity\Article;
 use Blogger\BlogBundle\Entity\Comment;
+use Blogger\BlogBundle\Event\EnquiryEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Enquiry;
 use Blogger\BlogBundle\Form\EnquiryType;
@@ -27,15 +28,12 @@ class PageController extends Controller
         $captcha = $this->get('phpro.captcha-service');
 
         if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Contact enquiry from symblog')
-                ->setFrom('enquiries@symblog.co.uk')
-                ->setTo($this->getParameter('blogger_blog.emails.contact_email'))
-                ->setBody($this->renderView('@BloggerBlog/Page/contactEmail.txt.twig', array('enquiry' => $enquiry)));
-            $this->get('mailer')->send($message);
+
+            $eventDispatcher = $this->get('event_dispatcher');
+            $event = new EnquiryEvent($enquiry);
+            $eventDispatcher->dispatch('custom.event.contact_page', $event);
 
             $this->addFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
-
             // Redirect - This is important to prevent users re-posting
             // the form if they refresh the page
             return $this->redirectToRoute('blogger_blog_contact');
@@ -49,23 +47,21 @@ class PageController extends Controller
     public function sidebarAction()
     {
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
-        $tagslist = $this->createTagList($articleRepository->getTags());
-        $tagWeights = $articleRepository->getTagWeights($tagslist);
 
         $categories = $this->createCategoryList($articleRepository->getCategories());
-
-        $commentLimit = 10;
 
         $latestComments = $this
             ->getDoctrine()
             ->getRepository(Comment::class)
-            ->getLatestComments($commentLimit)
+            ->getLatestComments($commentLimit = 10)
         ;
 
         return $this->render('@BloggerBlog/Page/sidebar.html.twig', array(
             'latestComments'    => $latestComments,
-            'tags'              => $tagWeights,
-            'categories'        => $categories
+            'tags'              => $this->get('phpro.extractor.tag_extractor')->getTagWeights(
+                $articleRepository->getAllArticles()->getResult()
+            ),
+            'categories'        => $categories,
         ));
     }
 
@@ -83,21 +79,5 @@ class PageController extends Controller
         }
 
         return $categories;
-    }
-
-    public function createTagList($blogTags)
-    {
-        $tags = array();
-        foreach ($blogTags as $blogTag)
-        {
-            $tags = array_merge(explode(",", $blogTag['tags']), $tags);
-        }
-
-        foreach ($tags as &$tag)
-        {
-            $tag = trim($tag);
-        }
-
-        return $tags;
     }
 }
