@@ -19,6 +19,6 @@
             {% include '@BloggerBlog/Comment/index.html.twig' with { 'comments': comments } %}
         </section>
         <h3>{% trans %}blog.add.comment{% endtrans %}</h3>
-        {{ render(controller('BloggerBlogBundle:Comment:create', { 'articleId': article.id, 'request': app.request})) }}
+        {{ render(controller('App:Comment:create', { 'articleId': article.id, 'request': app.request})) }}
     </section>
 {% endblock %}

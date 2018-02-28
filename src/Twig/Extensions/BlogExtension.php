@@ -2,7 +2,7 @@
 
 namespace App\Twig\Extensions;
 
-class BloggerBlogExtension extends \Twig_Extension
+class BlogExtension extends \Twig_Extension
 {
     public function getFilters()
     {

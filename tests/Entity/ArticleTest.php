@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BloggerBlogBundle\Entity;
+namespace Tests\App\Entity;
 
 use App\Entity\Article;
 

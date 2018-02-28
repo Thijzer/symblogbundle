@@ -58,7 +58,7 @@ class ArticleController extends Controller
             throw $this->createNotFoundException('Unable to find article post.');
         }
 
-        $comments = $this->getDoctrine()->getRepository('BloggerBlogBundle:Comment')
+        $comments = $this->getDoctrine()->getRepository('App:Comment')
             ->getCommentsForBlog($article->getId());
 
         return $this->render('@BloggerBlog/Article/show.html.twig', [

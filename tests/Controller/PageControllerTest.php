@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BloggerBlogBundle\Controller;
+namespace Tests\App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;

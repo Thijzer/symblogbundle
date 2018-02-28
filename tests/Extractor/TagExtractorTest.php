@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BloggerBlogBundle\Extractor;
+namespace Tests\App\Extractor;
 
 use App\Entity\Article;
 use App\Extractor\TagExtractor;

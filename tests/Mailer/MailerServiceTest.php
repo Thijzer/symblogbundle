@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BloggerBlogBundle\Mailer;
+namespace Tests\App\Mailer;
 
 use App\Mailer\EmailAddress;
 use App\Mailer\Mail;
@@ -52,7 +52,6 @@ class MailerServiceTest extends \PHPUnit_Framework_TestCase
      */
     private function createSwiftMailer()
     {
-        /** @var \Swift_Mailer $mailer */
         return $this->prophesize(\Swift_Mailer::class);
     }
 
