@@ -27,23 +27,17 @@ class PageController extends Controller
 
         $captcha = $this->get('phpro.captcha-service');
 
-        $logger = $this->get('logger');
-
         if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
 
             $eventDispatcher = $this->get('event_dispatcher');
             $event = new EnquiryEvent($enquiry);
             $eventDispatcher->dispatch('custom.event.contact_page', $event);
 
-            $logger->info('email is send');
-
             $this->addFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
             // Redirect - This is important to prevent users re-posting
             // the form if they refresh the page
             return $this->redirectToRoute('blogger_blog_contact');
         }
-
-        $logger->critical('reCaptcha attack');
 
         return $this->render('@BloggerBlog/Page/contact.html.twig', array(
             'form' => $form->createView()

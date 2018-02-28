@@ -27,8 +27,7 @@ services:
 
     phpro.captcha-service:
         class: Blogger\BlogBundle\Utils\Recaptcha
-        arguments: ["%recaptcha_secretkey%"]
-
+        arguments: ["%recaptcha_secretkey%", '@logger']
 
     custom.event.contact_page:
         class: Blogger\BlogBundle\EventSubscriber\ContactPageEventSubscriber

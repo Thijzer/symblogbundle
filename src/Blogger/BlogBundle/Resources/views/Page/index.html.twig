@@ -16,9 +16,9 @@
             </div>
 
             <footer class="meta">
-                <p>{% trans %}blog.comments{% endtrans %}  <a href="{{ path }}#comments">{{ article.comments|length }}</a></p>
+                <p>{% trans %}blog.comments: {% endtrans %}  <a href="{{ path }}#comments">{{ article.comments|length }}</a></p>
                 <p>{% trans %}blog.posted.by{% endtrans %} <span class="highlight">{{ article.author }}</span> at {{ article.created|date('h:iA') }}</p>
-                <p>{% trans %}blog.tags{% endtrans %} <span class="highlight">{{ article.tags }}</span></p>
+                <p>{% trans %}blog.tags: {% endtrans %} <span class="highlight">{{ article.tags }}</span></p>
             </footer>
         </article>
     {% else %}
