@@ -18,7 +18,7 @@ class ArticleController extends Controller
      *
      * @throws \LogicException
      */
-    public function indexAction($page = 1)
+    public function index($page = 1)
     {
         $articles = $this->getArticleRepository()->getAllArticles();
 
@@ -29,7 +29,7 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function showByCategoryAction($category, $page = 1)
+    public function showByCategory($category, $page = 1)
     {
         $articles = $this->getArticleRepository()->getAllArticlesByCategory($category);
 
@@ -50,7 +50,7 @@ class ArticleController extends Controller
      * @throws \LogicException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function showAction($slug)
+    public function show($slug)
     {
         $article = $this->getArticleRepository()->findBySlug($slug);
 

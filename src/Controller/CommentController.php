@@ -18,7 +18,7 @@ class CommentController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createAction($articleId, Request $request)
+    public function create(string $articleId, Request $request)
     {
         $comment = new Comment($this->getArticle($articleId));
 
@@ -47,7 +47,7 @@ class CommentController extends Controller
      * @param $articleId
      * @return Article
      */
-    protected function getArticle($articleId)
+    private function getArticle(string $articleId)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($articleId);
 

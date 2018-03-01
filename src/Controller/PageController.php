@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
-    public function aboutAction()
+    public function about()
     {
         return $this->render('@BloggerBlog/Page/about.html.twig');
     }
 
-    public function contactAction(Request $request)
+    public function contact(Request $request)
     {
         $enquiry = new Enquiry();
         $form = $this->createForm(EnquiryType::class, $enquiry);
@@ -42,7 +42,7 @@ class PageController extends Controller
         ]);
     }
 
-    public function sidebarAction()
+    public function sidebar()
     {
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
 
