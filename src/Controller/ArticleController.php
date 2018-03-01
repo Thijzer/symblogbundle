@@ -7,6 +7,7 @@ use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use App\Entity\Comment;
 
 /**
  * Article controller.
@@ -35,8 +36,8 @@ class ArticleController extends Controller
 
         $pagerfanta = $this->pagination($page, $articles);
 
-        return $this->render('@BloggerBlog/Page/index.html.twig', [
-                'my_pager'      => $pagerfanta,
+        return $this->render('Page/index.html.twig', [
+            'my_pager' => $pagerfanta,
         ]);
     }
 
@@ -52,19 +53,26 @@ class ArticleController extends Controller
      */
     public function show($slug)
     {
+        $article = $this->getArticle($slug);
+
+        $comments = $this->getDoctrine()->getRepository(Comment::class)
+            ->getCommentsForBlog($article->getId());
+     
+        return $this->render('Article/show.html.twig', [
+            'article' => $article,
+            'comments' => $comments,
+        ]);
+    }
+
+    public function getArticle(string $slug)
+    {
         $article = $this->getArticleRepository()->findBySlug($slug);
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find article post.');
         }
 
-        $comments = $this->getDoctrine()->getRepository('App:Comment')
-            ->getCommentsForBlog($article->getId());
-
-        return $this->render('@BloggerBlog/Article/show.html.twig', [
-            'article' => $article,
-            'comments' => $comments,
-        ]);
+        return $article;
     }
 
     /**

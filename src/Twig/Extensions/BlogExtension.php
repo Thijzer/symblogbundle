@@ -50,6 +50,6 @@ class BlogExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'blogger_blog_extension';
+        return 'blog_extension';
     }
 }

@@ -14,7 +14,7 @@ class PageController extends Controller
 {
     public function about()
     {
-        return $this->render('@BloggerBlog/Page/about.html.twig');
+        return $this->render('Page/about.html.twig');
     }
 
     public function contact(Request $request)
@@ -34,10 +34,10 @@ class PageController extends Controller
             $this->addFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
             // Redirect - This is important to prevent users re-posting
             // the form if they refresh the page
-            return $this->redirectToRoute('blogger_blog_contact');
+            return $this->redirectToRoute('blog_contact');
         }
 
-        return $this->render('@BloggerBlog/Page/contact.html.twig', [
+        return $this->render('Page/contact.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -54,7 +54,7 @@ class PageController extends Controller
             ->getLatestComments($commentLimit = 10)
         ;
 
-        return $this->render('@BloggerBlog/Page/sidebar.html.twig', [
+        return $this->render('Page/sidebar.html.twig', [
             'latestComments'    => $latestComments,
             'tags'              => $this->get('phpro.extractor.tag_extractor')->getTagWeights(
                 $articleRepository->getAllArticles()->getResult()

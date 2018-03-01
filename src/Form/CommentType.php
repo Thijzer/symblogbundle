@@ -17,6 +17,6 @@ class CommentType extends AbstractType
 
     public function getName()
     {
-        return 'blogger_blog_comment_type';
+        return 'blog_comment_type';
     }
 }

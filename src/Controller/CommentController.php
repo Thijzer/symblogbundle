@@ -29,7 +29,7 @@ class CommentController extends Controller
             $this->getCommentRepository()->addComment($comment);
         }
 
-        return $this->render('@BloggerBlog/Comment/create.html.twig', [
+        return $this->render('Comment/create.html.twig', [
             'comment' => $comment,
             'form' => $form->createView()
         ]);

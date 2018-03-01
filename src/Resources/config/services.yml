@@ -1,22 +1,18 @@
 services:
-#    blogger_blog.example:
-#        class: App\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-
 
     form.type.enquire_type:
         class: App\Form\EnquiryType
         tags: [form.choice_list_factor]
 
-    blogger_blog.fixtures.article:
+    blog.fixtures.article:
         class: App\DataFixtures\ORM\ArticleFixtures
         tags: [doctrine.fixture.orm]
 
-    blogger_blog.fixtures.comment:
+    blog.fixtures.comment:
         class: App\DataFixtures\ORM\CommentFixtures
         tags: [doctrine.fixture.orm]
 
-    blogger_blog.twig.extension:
+    blog.twig.extension:
         class: App\Twig\Extensions\BlogExtension
         tags: [twig.extension]
 

@@ -43,7 +43,7 @@ class PageControllerTest extends WebTestCase
             /** @var \Swift_Message $message */
             $message = current($messages);
 
-            $symblogEmail = $client->getContainer()->getParameter('blogger_blog.emails.contact_email');
+            $symblogEmail = $client->getContainer()->getParameter('blog.emails.contact_email');
 
             $this->assertArrayHasKey($symblogEmail, $message->getTo());
         }
