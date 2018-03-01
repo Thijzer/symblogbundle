@@ -1,8 +1,8 @@
-{% extends '@BloggerBlog/layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block body %}
     {% for article in my_pager.currentPageResults %}
-        {% set path = path('blogger_blog_show', { 'slug': article.slug })  %}
+        {% set path = path('blog_show', { 'slug': article.slug })  %}
         <article class="blog">
             <div class="date"><time datetime="{{ article.created|date('c') }}">{{ article.created|date('l, F j, Y') }}</time></div>
             <header>

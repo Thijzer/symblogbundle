@@ -95,6 +95,9 @@
     "pagerfanta/pagerfanta": {
         "version": "v1.0.5"
     },
+    "paragonie/random_compat": {
+        "version": "v2.0.11"
+    },
     "phar-io/manifest": {
         "version": "1.0.1"
     },
@@ -311,6 +314,15 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.7.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.7.0"
+    },
+    "symfony/polyfill-php70": {
+        "version": "v1.7.0"
+    },
+    "symfony/polyfill-util": {
+        "version": "v1.7.0"
+    },
     "symfony/process": {
         "version": "v4.0.4"
     },
@@ -324,6 +336,18 @@
             "branch": "master",
             "version": "4.0",
             "ref": "cda8b550123383d25827705d05a42acf6819fe4e"
+        }
+    },
+    "symfony/security": {
+        "version": "v3.4.4"
+    },
+    "symfony/security-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
     },
     "symfony/security-core": {

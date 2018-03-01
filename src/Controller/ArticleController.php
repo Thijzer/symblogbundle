@@ -24,7 +24,7 @@ class ArticleController extends Controller
 
         $pagerfanta = $this->pagination($page, $articles);
 
-        return $this->render('@BloggerBlog/Page/index.html.twig', [
+        return $this->render('Page/index.html.twig', [
             'my_pager' => $pagerfanta,
         ]);
     }
