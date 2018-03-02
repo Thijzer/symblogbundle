@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Enquiry;
 use App\Form\EnquiryType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Extractor\TagExtractor;
 
 class PageController extends Controller
 {
@@ -56,7 +57,7 @@ class PageController extends Controller
 
         return $this->render('Page/sidebar.html.twig', [
             'latestComments'    => $latestComments,
-            'tags'              => $this->get('phpro.extractor.tag_extractor')->getTagWeights(
+            'tags'              => (new TagExtractor())->getTagWeights(
                 $articleRepository->getAllArticles()->getResult()
             ),
             'categories'        => $categories,

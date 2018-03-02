@@ -1,15 +1,14 @@
 <?php
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures;
 
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use App\Entity\Article;
 use Faker\Factory;
 
-class CategoryFixtures extends AbstractFixture
+class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {

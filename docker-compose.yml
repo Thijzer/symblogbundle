@@ -18,3 +18,14 @@ services:
     environment:
       - MYSQL_DATABASE=dockerphp
       - MYSQL_ROOT_PASSWORD=password
+
+# blackfire Agent 
+  blackfire:
+    image: blackfire/blackfire
+    environment:
+        # Exposes the host BLACKFIRE_SERVER_ID and TOKEN environment variables.
+        - BLACKFIRE_SERVER_ID=deb5c295-1d4f-49d2-bfe9-491295fe2e96
+        - BLACKFIRE_SERVER_TOKEN=2df026f6c9792ea1d45c3e4bb521b57ea9cb79ce40a4fd851ed9dfcec17db2f5
+        # You can also use global environment credentials :
+        # BLACKFIRE_SERVER_ID: SERVER-ID
+        # BLACKFIRE_SERVER_TOKEN: SERVER-TOKEN

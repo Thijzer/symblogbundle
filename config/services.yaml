@@ -28,3 +28,28 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    pagerfanta.view.default:
+        class: Pagerfanta\View\DefaultView
+        public: false
+        tags: [{ name: pagerfanta.view, alias: default }]
+
+    phpro.captcha-service:
+        class: App\Utils\Recaptcha
+        arguments: ["%recaptcha_sitekey%", '@logger']
+
+    custom.event.contact_page:
+        class: App\EventSubscriber\ContactPageEventSubscriber
+        tags:
+            - { name: kernel.event_listener, event: custom.event.contact_page, method: onCustomEvent }
+        arguments: ['@phpro.mailer.mailer_service']
+
+    phpro.mailer.mailer_service:
+        class: App\Mailer\MailerService
+        arguments:
+            - '@twig'
+            - '@swiftmailer.mailer'
+        calls:
+            - method: setLogger
+              arguments:
+                  - '@logger'
