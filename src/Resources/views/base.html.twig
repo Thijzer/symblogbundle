@@ -10,7 +10,7 @@
     {% block stylesheets %}
         <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
-        <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />
+        <link href="../css/screen.css" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('bundles/whiteoctoberpagerfanta/css/pagerfantaDefault.css') }}" type="text/css" media="all" />
     {% endblock %}
 </head>
@@ -23,8 +23,8 @@
                 <nav>
                     <ul class="navigation">
                         <li><a href="{{ path('blog_homepage') }}">{% trans %}blog.home_nav_title{% endtrans %}</a></li>
-                        <li><a href="{{ path('blog_about') }}">{% trans %}blog.about_nav_title{% endtrans %}</a></li>
-                        <li><a href="{{ path('blog_contact') }}">{% trans %}blog.contact_nav_title{% endtrans %}</a></li>
+                        <li><a href="{{ path('page_about') }}">{% trans %}blog.about_nav_title{% endtrans %}</a></li>
+                        <li><a href="{{ path('page_contact') }}">{% trans %}blog.contact_nav_title{% endtrans %}</a></li>
                     </ul>
                 </nav>
             {% endblock %}
@@ -52,7 +52,7 @@
 
 {% block javascripts %}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="BlogBundle/Resources/public/js/reCaptcha.js"></script>
+    <script src="../js/reCaptcha.js"></script>
 {% endblock %}
 </body>
 </html>

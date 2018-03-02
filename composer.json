@@ -28,7 +28,7 @@
         "symfony/swiftmailer-bundle": "^3.0",
         "symfony/translation": "^4.0",
         "symfony/validator": "^4.0",
-        "twig/extensions": "^1.0",
+        "twig/extensions": "^1.5",
         "twig/twig": "^1.0||^2.0",
         "white-october/pagerfanta-bundle": "^1.0"
     },

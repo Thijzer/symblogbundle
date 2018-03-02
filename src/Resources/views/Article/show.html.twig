@@ -1,4 +1,4 @@
-{% extends '@BloggerBlog/layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}{{ article.title }}{% endblock %}
 
@@ -16,9 +16,9 @@
     <section class="comments" id="comments">
         <section class="previous-comments">
             <h3>{% trans %}blog.comments{% endtrans %}</h3>
-            {% include '@BloggerBlog/Comment/index.html.twig' with { 'comments': comments } %}
+            {% include 'Comment/index.html.twig' with { 'comments': comments } %}
         </section>
         <h3>{% trans %}blog.add.comment{% endtrans %}</h3>
-        {{ render(controller('App:Comment:create', { 'articleId': article.id, 'request': app.request})) }}
+        {{ render(controller('App\\Controller\\CommentController::create', { 'articleId': article.id, 'request': app.request})) }}
     </section>
 {% endblock %}

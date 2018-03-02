@@ -2,13 +2,15 @@
 
 namespace App\Twig\Extensions;
 
+use Twig\TwigFilter;
+
 class BlogExtension extends \Twig_Extension
 {
     public function getFilters()
     {
-        return [
-            'created_ago' => new \Twig_SimpleFilter('createdAgo'),
-        ];
+        return array(
+            new TwigFilter('created_ago', array($this, 'createdAgo')),
+        );
     }
 
     public function createdAgo(\DateTime $dateTime)

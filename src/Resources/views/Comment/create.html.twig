@@ -1,6 +1,6 @@
 {% block body %}
     <h1>{% trans %}blog.add.comment.post{% endtrans %} "{{ comment.article.title }}"</h1>
-    {% include '@BloggerBlog/Comment/form.html.twig' with { 'form': form } %}
+    {% include 'Comment/form.html.twig' with { 'form': form } %}
 
     {# trick to redirect from a embedded controller with form #}
     {% if form.vars.submitted and form.vars.valid %}

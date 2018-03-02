@@ -20,16 +20,16 @@ page_contact:
 
 blog_show:
     path:  /page/article/{slug}
-    defaults: { _controller: App:Article:show }
+    defaults: { _controller: App\Controller\ArticleController::show }
 
 blog_category_show:
     path:  /page/{category}/{page}
     defaults:
       page: 1
-      _controller: App:Article:showByCategory
+      _controller: App\Controller\ArticleController::showByCategory
 
 blog_comment_create:
     path:  /comment/{articleId}
-    defaults: { _controller: App:Comment:create }
+    defaults: { _controller: App\Controller\CommentController::create }
     requirements:
         articleId: \d+
