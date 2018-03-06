@@ -24,9 +24,6 @@ class CategoryFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        $category = new Category();
-        $category->setCategoryName($faker->word());
-
-        return $category;
+        return new Category($faker->word());
     }
 }

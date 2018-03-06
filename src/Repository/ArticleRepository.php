@@ -40,14 +40,4 @@ class ArticleRepository extends EntityRepository
 
         return $qb;
     }
-
-    public function getCategories()
-    {
-        $article_categories = $this->createQueryBuilder('a')
-            ->select('a.category')
-            ->getQuery()
-            ->getResult();
-
-        return $article_categories;
-    }
 }

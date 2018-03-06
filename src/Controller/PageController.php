@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Event\EnquiryEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,14 +29,13 @@ class PageController extends Controller
         $captcha = $this->get('phpro.captcha-service');
 
         if ($form->isSubmitted() && $form->isValid() && $captcha->isValid($request)) {
-            $eventDispatcher = $this->get('event_dispatcher');
+
             $event = new EnquiryEvent($enquiry);
-            $eventDispatcher->dispatch('custom.event.contact_page', $event);
+            $this->get('event_dispatcher')->dispatch('custom.event.contact_page', $event);
 
             $this->addFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
-            // Redirect - This is important to prevent users re-posting
-            // the form if they refresh the page
-            return $this->redirectToRoute('blog_contact');
+
+            return $this->redirectToRoute('page_contact');
         }
 
         return $this->render('Page/contact.html.twig', [
@@ -45,9 +45,10 @@ class PageController extends Controller
 
     public function sidebar()
     {
-        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
+        $articleRepository  = $this->getDoctrine()->getRepository(Article::class);
+        $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
 
-        $categories = $this->createCategoryList($articleRepository->getCategories());
+        $categories = $this->createCategoryList($categoryRepository->getCategories()->getArrayResult());
 
         $latestComments = $this
             ->getDoctrine()
@@ -64,10 +65,10 @@ class PageController extends Controller
         ]);
     }
 
-    public function createCategoryList($article_categories)
+    public function createCategoryList($articleCategories)
     {
         $categories = [];
-        foreach ($article_categories as $article_category) {
+        foreach ($articleCategories as $article_category) {
             $categories = array_merge(explode(",", $article_category['category']), $categories);
         }
 
