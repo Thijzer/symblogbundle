@@ -36,6 +36,7 @@ services:
 
     phpro.captcha-service:
         class: App\Utils\Recaptcha
+        public: true
         arguments: ["%recaptcha_sitekey%", '@logger']
 
     custom.event.contact_page:
