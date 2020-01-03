@@ -1,0 +1,35 @@
+blog_homepage:
+    path: /{page}
+    defaults:
+      page: 1
+      _controller: App\Controller\ArticleController::index
+
+blog_page:
+    path: /page
+    defaults:
+      page: 1
+      _controller: App\Controller\ArticleController::index
+
+page_about:
+    path: /page/about
+    defaults: { _controller: App\Controller\PageController::about }
+
+page_contact:
+    path:  /page/contact
+    defaults: { _controller: App\Controller\PageController::contact }
+
+blog_show:
+    path:  /page/article/{slug}
+    defaults: { _controller: App\Controller\ArticleController::show }
+
+blog_category_show:
+    path:  /page/{category}/{page}
+    defaults:
+      page: 1
+      _controller: App\Controller\ArticleController::showByCategory
+
+blog_comment_create:
+    path:  /comment/{articleId}
+    defaults: { _controller: App\Controller\CommentController::create }
+    requirements:
+        articleId: \d+
